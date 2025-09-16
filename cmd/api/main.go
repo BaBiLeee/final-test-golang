@@ -11,10 +11,10 @@ import (
 	_ "github.com/lib/pq"
 	elastic "github.com/olivere/elastic/v7"
 
-	"yourmodule/internal/cache"
-	"yourmodule/internal/db"
-	"yourmodule/internal/es"
-	"yourmodule/internal/handlers"
+	"blog/internal/db"
+	"blog/internal/es"
+	"blog/internal/handlers"
+	cache "blog/internal/redis"
 
 	"github.com/gorilla/mux"
 )

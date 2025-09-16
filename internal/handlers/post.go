@@ -1,6 +1,9 @@
 package handlers
 
 import (
+	"blog/internal/db"
+	"blog/internal/es"
+	"blog/internal/redis"
 	"encoding/json"
 	"net/http"
 	"strconv"
