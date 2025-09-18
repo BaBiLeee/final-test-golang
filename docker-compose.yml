@@ -1,12 +1,14 @@
+version: "3.9"
+
 services:
   postgres:
     image: postgres:15
     container_name: blog-postgres
     restart: always
     environment:
-      POSTGRES_USER: blog_user
-      POSTGRES_PASSWORD: blog_pass
-      POSTGRES_DB: blog_db
+      POSTGRES_USER: new_user
+      POSTGRES_PASSWORD: abcd1234
+      POSTGRES_DB: golang
     ports:
       - "5432:5432"
     volumes:
@@ -33,7 +35,7 @@ services:
 
   api:
     build:
-      context: .    # repo gốc, nơi có Dockerfile
+      context: .
     container_name: blog-api
     restart: always
     depends_on:
@@ -41,15 +43,11 @@ services:
       - redis
       - elasticsearch
     ports:
-      - "3000:3000"
+      - "8080:8080"
     environment:
-      DB_HOST: postgres
-      DB_USER: blog_user
-      DB_PASS: blog_pass
-      DB_NAME: blog_db
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      ELASTICSEARCH_HOST: http://elasticsearch:9200
+      DATABASE_URL: postgres://new_user:abcd1234@postgres:5432/golang?sslmode=disable
+      REDIS_ADDR: redis:6379
+      ES_URL: http://elasticsearch:9200
 
 volumes:
   postgres_data:
